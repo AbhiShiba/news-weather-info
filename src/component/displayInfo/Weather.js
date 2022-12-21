@@ -2,59 +2,94 @@ import React, { useEffect, useState } from "react";
 import Loader from "../Loader/Loader";
 
 function Weather() {
-  const [getWeather, SetGetWeather] = useState({
-    current: {
-      condition: { text: "", icon: "" },
-      humidity: "",
-      is_day: 0,
-      temp_c: "",
-    },
-    location: { country: "", name: "" },
-  });
+  // const [getWeather, SetGetWeather] = useState({
+  //   current: {
+  //     condition: { text: "", icon: "" },
+  //     humidity: "",
+  //     is_day: 0,
+  //     temp_c: "",
+  //   },
+  //   location: { country: "", name: "" },
+  // });
+
+  const [weather, setWeather] = useState({main:{temp: '', humidity : ""},name: '', sys: {country: ''}, weather: [{main: ''}]});
+
 
   const [disDate,setDisDate] = useState({time : "", date : ""});
   //const [check,setCheck] = useState(false);
-  const apiUrl = {
-    url: "http://api.weatherapi.com/v1",
-    key: "6723a221868f4289938145702221712",
-  };
+  // const apiUrl = {
+  //   url: "http://api.weatherapi.com/v1",
+  //   key: "6723a221868f4289938145702221712",
+  // };
+
+  const weatherAPI = {
+    key: "a64d07a306972de8e9f8c8267a9cc2c0",
+    base: "https://api.openweathermap.org/data/2.5/"
+  }
 
   const [resState, setResState] = useState(false);
 
   useEffect(() => {
-    const weatherInfo = async () => {
-      if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(async (position) => {
+    // const weatherInfo = async () => {
+    //   if (navigator.geolocation) {
+    //     navigator.geolocation.getCurrentPosition(async (position) => {
+    //       // get user's location
+    //       let pos = {
+    //         lat: position.coords.latitude,
+    //         lon: position.coords.longitude,
+    //       };
+    //       // get whether of user's location
+    //       await fetch(
+    //         `${apiUrl.url}/current.json?key=${apiUrl.key}&q=${pos.lat},${pos.lon}`
+    //       )
+    //         .then((res) => {
+    //           setResState(res.ok);
+    //           if (res.ok){
+                
+    //             return res.json();} 
+    //           else{
+    //             //setCheck(!check);
+    //             //console.log(check);
+    //              throw new Error("Invalid location/city/country");
+    //             }
+    //         })
+    //         .then((result) => {
+    //           // console.log(result);
+    //           SetGetWeather(result);
+    //         })
+    //         .catch((error) => console.log(error));
+    //     });
+    //   }
+    // };
+    // weatherInfo();
+
+    const fetchWeather = async () =>{
+      if(navigator.geolocation){
+        navigator.geolocation.getCurrentPosition(async (position) =>{
           // get user's location
           let pos = {
             lat: position.coords.latitude,
-            lon: position.coords.longitude,
-          };
+            lon: position.coords.longitude, 
+          }
           // get whether of user's location
-          await fetch(
-            `${apiUrl.url}/current.json?key=${apiUrl.key}&q=${pos.lat},${pos.lon}`
-          )
-            .then((res) => {
-              setResState(res.ok);
-              if (res.ok){
-                
-                return res.json();} 
-              else{
-                //setCheck(!check);
-                //console.log(check);
-                 throw new Error("Invalid location/city/country");
-                }
-            })
-            .then((result) => {
-              // console.log(result);
-              SetGetWeather(result);
-            })
-            .catch((error) => console.log(error));
+          await fetch(`${weatherAPI.base}weather?lat=${pos.lat}&lon=${pos.lon}&units=metric&appid=${weatherAPI.key}`)
+          .then(res => {
+            setResState(res.ok);
+            if (res.ok)
+              return res.json();
+            else
+              throw new Error('Invalid location/city/country');
+          })
+          .then(result => {
+            setWeather(result);
+            console.log(result);
+          })
+          .catch(error => console.log(error));
         });
       }
-    };
-    weatherInfo();
-  }, [apiUrl.key,apiUrl.url]);
+    }
+    fetchWeather();
+  }, [weatherAPI.key, weatherAPI.base]);
 
   let day;
   let weekDay = new Date().getDay();
@@ -106,18 +141,14 @@ setInterval(() => {
       ) : (
        <>
           <h1>
-            {getWeather.current.temp_c}
+            {weather.main.temp}
             <span>&deg;C</span>
           </h1>
-          <img
-            id="w-icon"
-            src={getWeather.current.condition.icon}
-            alt="weather"
-          />
-          <p>{getWeather.current.condition.text}</p>
-          <p>Humidity: {getWeather.current.humidity}</p>
+
+          <p>{weather.weather[0].main}</p>
+          <p>Humidity: {weather.main.humidity}</p>
           <p className="place">
-            {getWeather.location.name}, {getWeather.location.country}
+            {weather.name}, {weather.sys.country}
           </p>
           
           </>
