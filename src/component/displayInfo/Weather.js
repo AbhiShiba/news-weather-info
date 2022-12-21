@@ -12,7 +12,7 @@ function Weather() {
     location: { country: "", name: "" },
   });
 
-  const [disDate,setDisDate] = useState("");
+  const [disDate,setDisDate] = useState({time : "", date : ""});
   const [check,setCheck] = useState(false);
   const apiUrl = {
     url: "http://api.weatherapi.com/v1",
@@ -41,6 +41,7 @@ function Weather() {
                 return res.json();} 
               else{
                 setCheck(!check);
+                console.log(check);
                  throw new Error("Invalid location/city/country");
                 }
             })
@@ -89,7 +90,11 @@ setInterval(() => {
     let AmOrPm = date.getHours() < 12 ? 'AM' : 'PM';
     let H = H_val < 10 ? '0'+H_val : H_val;
     let fullTime = `${H} : ${M_val} : ${sec} ${AmOrPm}`;
-    setDisDate(fullTime);
+    let fullDate = `${date.getDate()}-${date.getMonth()}-${date.getFullYear()}`
+    setDisDate({
+      time : fullTime,
+      date : fullDate
+    });
   })
 
 
@@ -118,7 +123,8 @@ setInterval(() => {
           </>
         
       )}
-      <p className="disDate">{disDate} {day}</p>
+      <p className="disDate">{disDate.time} {day}</p>
+      <p className="disDate">{disDate.date}</p>
       </div>
     </>
   );
