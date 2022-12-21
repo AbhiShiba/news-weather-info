@@ -141,7 +141,7 @@ setInterval(() => {
       ) : (
        <>
           <h1>
-            {weather.main.temp}
+            {Math.round(weather.main.temp)}
             <span>&deg;C</span>
           </h1>
 
