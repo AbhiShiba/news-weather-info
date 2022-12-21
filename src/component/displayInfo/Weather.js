@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Loader from "../Loader/Loader";
 
-function Weather(props) {
+function Weather() {
   const [getWeather, SetGetWeather] = useState({
     current: {
       condition: { text: "", icon: "" },
@@ -40,7 +40,7 @@ function Weather(props) {
               else throw new Error("Invalid location/city/country");
             })
             .then((result) => {
-              console.log(result);
+              // console.log(result);
               SetGetWeather(result);
             })
             .catch((error) => console.log(error));
@@ -109,10 +109,11 @@ setInterval(() => {
           <p className="place">
             {getWeather.location.name},{getWeather.location.country}
           </p>
-          <p className="disDate">{disDate} {day}</p>
+          
           </>
         
       )}
+      <p className="disDate">{disDate} {day}</p>
       </div>
     </>
   );

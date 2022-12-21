@@ -62,7 +62,7 @@ function App() {
           dataName={info.title}
           dataDescription={info.description}
           dataImage={info.image_url}
-          dataIndex={index}
+          yesKey={index}
         />
       );
     });
@@ -78,7 +78,7 @@ function App() {
             <DropDown Country="Country" langInfo={country} checkEvent={changeEvenCountry} />
           </div>
         </div>
-        <div className="info">{loaderStatus ? displayNews(displayNewsData) : <Loader/>}
+        <div className="info" key="uniqe">{loaderStatus ? displayNews(displayNewsData) : <Loader/>}
       </div>
       </div>
       <div className="right-container">

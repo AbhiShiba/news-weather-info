@@ -7,14 +7,14 @@ function DisplayNewsInfo(props) {
 
 let urlForimage = props.dataImage === null ? myImage : props.dataImage;
   return (
-    <div key={"div" + props.dataIndex} id={props.dataIndex}>
-      <h2 key={"h2" + props.dataIndex}>{props.dataName}</h2>
-      <div className="img-p" key={"img-p" + props.dataIndex}>
-        <p key={"p" + props.dataIndex}>{props.dataDescription}</p>
+    <div key={"div" + props.yesKey} id={props.yesKey}>
+      <h2 key={"h2" + props.yesKey}>{props.dataName}</h2>
+      <div className="img-p" key={"img-p" + props.yesKey}>
+        <p key={"p" + props.yesKey}>{props.dataDescription}</p>
         <img
-          key={"img" + props.dataIndex}
+          key={"img" + props.yesKey}
           src={urlForimage}
-          alt={"image" + props.dataIndex}
+          alt={"image" + props.yesKey}
         />
       </div>
     </div>
