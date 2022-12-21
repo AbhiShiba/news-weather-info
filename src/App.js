@@ -46,7 +46,7 @@ function App() {
       setDisplayNewsData(newsData.results);
     }
     newsApiCall();
-  }, [changeCountry,changeLang])
+  }, [changeCountry,changeLang,newsApi.url,newsApi.key])
 
   // lat={location.Latitude} log={location.Longitude}
   // console.log(location); 
@@ -54,7 +54,7 @@ function App() {
   const displayNews = (d) => {
     return d.map((info, index) => {
       if (info.description === null) {
-        return;
+        return "";
       }
 
       return (

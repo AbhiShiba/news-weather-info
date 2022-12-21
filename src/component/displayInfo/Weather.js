@@ -48,7 +48,7 @@ function Weather(props) {
       }
     };
     weatherInfo();
-  }, []);
+  }, [apiUrl.key,apiUrl.url]);
 
   let day;
   let weekDay = new Date().getDay();
@@ -71,12 +71,12 @@ function Weather(props) {
     case 5:
       day = "Friday";
       break;
-    case 6:
+    default:
       day = "Saturday";
       break;
   }
 
-  let x = setInterval(() => {
+setInterval(() => {
     let date = new Date();
     let H_val = date.getHours() > 12 ? date.getHours() - 12 : date.getHours();
     let M_val = date.getMinutes() < 10 ? "0"+date.getMinutes() : date.getMinutes();
