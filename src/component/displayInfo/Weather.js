@@ -13,7 +13,7 @@ function Weather() {
   });
 
   const [disDate,setDisDate] = useState({time : "", date : ""});
-  const [check,setCheck] = useState(false);
+  //const [check,setCheck] = useState(false);
   const apiUrl = {
     url: "http://api.weatherapi.com/v1",
     key: "6723a221868f4289938145702221712",
@@ -40,8 +40,8 @@ function Weather() {
                 
                 return res.json();} 
               else{
-                setCheck(!check);
-                console.log(check);
+                //setCheck(!check);
+                //console.log(check);
                  throw new Error("Invalid location/city/country");
                 }
             })
