@@ -13,7 +13,7 @@ function Weather() {
   });
 
   const [disDate,setDisDate] = useState("");
-
+  const [check,setCheck] = useState(false);
   const apiUrl = {
     url: "http://api.weatherapi.com/v1",
     key: "6723a221868f4289938145702221712",
@@ -36,8 +36,13 @@ function Weather() {
           )
             .then((res) => {
               setResState(res.ok);
-              if (res.ok) return res.json();
-              else throw new Error("Invalid location/city/country");
+              if (res.ok){
+                
+                return res.json();} 
+              else{
+                setCheck(!check);
+                 throw new Error("Invalid location/city/country");
+                }
             })
             .then((result) => {
               // console.log(result);
@@ -48,7 +53,7 @@ function Weather() {
       }
     };
     weatherInfo();
-  }, [apiUrl.key,apiUrl.url]);
+  }, [apiUrl.key,apiUrl.url,check]);
 
   let day;
   let weekDay = new Date().getDay();
@@ -107,7 +112,7 @@ setInterval(() => {
           <p>{getWeather.current.condition.text}</p>
           <p>Humidity: {getWeather.current.humidity}</p>
           <p className="place">
-            {getWeather.location.name},{getWeather.location.country}
+            {getWeather.location.name}, {getWeather.location.country}
           </p>
           
           </>

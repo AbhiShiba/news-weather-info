@@ -68,7 +68,7 @@ width: 80%;
 }
 
 #w-info {
-  background-image: linear-gradient(90deg, rgb(44, 44, 223), lightsalmon, rgb(70, 226, 70));
+  background-image: linear-gradient(90deg, rgb(44, 44, 223), lightsalmon);
   border-radius: 5px;
   text-align: center;
   color: white;
