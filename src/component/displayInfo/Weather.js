@@ -54,7 +54,7 @@ function Weather() {
       }
     };
     weatherInfo();
-  }, [apiUrl.key,apiUrl.url,check]);
+  }, [apiUrl.key,apiUrl.url]);
 
   let day;
   let weekDay = new Date().getDay();
