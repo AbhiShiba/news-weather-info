@@ -1,0 +1,9 @@
+select {
+    border: none;
+    border-radius: 4px;
+    width: 4rem;
+}
+
+label {
+    color: white;
+}

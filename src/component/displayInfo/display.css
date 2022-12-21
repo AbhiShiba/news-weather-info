@@ -1,0 +1,45 @@
+.img-p {
+    background-color: lightblue;
+    display: flex;
+    padding: 10px;
+    border-radius: 5px;
+    justify-content: space-between;
+}
+
+img {
+    width: 300px;
+    height: 150px;
+}
+
+.w-div-info {
+    text-align: center;
+}
+
+#w-icon {
+    width: 50px;
+    height: 50px;
+}
+
+h1 {
+    margin-bottom: 0;
+}
+
+p {
+    margin: 3px;
+}
+
+h2 {
+    color: white;
+    font-size: 1rem;
+    font-family: fangsong;
+    margin-left: 10px;
+}
+
+.place {
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.disDate {
+    margin: 11px;
+}
